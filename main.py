@@ -1,3 +1,4 @@
+import random
 import pygame
 import sys
 import settings
@@ -14,6 +15,7 @@ cauldron = Cauldron()
 customer = Customer(settings.RECIPES, settings.CUSTOMER_WAIT_TIME)
 ui = GameUI(settings.WIDTH, settings.HEIGHT)
 score = 0
+current_visitor = random.choice(ui.visitors)
 
 running = True
 while running:
@@ -36,8 +38,9 @@ while running:
             cauldron.clear()
         elif action == "SERVE":
             if customer.check_potion(cauldron.ingredients):
-                score += 10
-                customer.generate_new_order()
+                    score += 10
+                    customer.generate_new_order()
+                    current_visitor = random.choice(ui.visitors)
             cauldron.clear()
 
     # Обновление таймеров
@@ -47,13 +50,18 @@ while running:
 
     if customer.update(dt):
         customer.generate_new_order()  # Клиент не дождался
+        current_visitor = random.choice(ui.visitors)
+        
+    # Отрисовка фона лавки
+    screen.blit(ui.bg_shop, (0, 0))
 
-    # Отрисовка
-    screen.fill((30, 30, 40))
+    # Отрисовка посетителя за прилавком (если он активен)
+    if customer.is_active:
+        screen.blit(current_visitor, (330, 115))
 
-    # Рисуем сам котёл в центре экрана
-    pygame.draw.circle(screen, (70, 70, 80), (400, 290), 95)
-    pygame.draw.circle(screen, cauldron.color, (400, 290), 80)
+    # Рисуем жидкость нужного цвета и поверх неё сам котёл
+    pygame.draw.ellipse(screen, cauldron.color, (320, 275, 160, 45))
+    screen.blit(ui.img_cauldron, (290, 240))
 
     # Готовим данные заказа для карточки клиента
     order_info = None
