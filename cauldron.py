@@ -21,14 +21,7 @@ class Cauldron:
         # Добавляем ингредиент в список
         self.ingredients.append(ingredient)
 
-        # Если добавлен только один ингредиент
-        if len(self.ingredients) == 1:
-            self.color = getattr(
-                settings, ingredient.upper(), settings.GRAY
-            )
-            return
-
-        # Ищем рецепт по двум ингредиентам
+        # Ищем рецепт по текущему составу котла (1, 2 или 3 ингредиента)
         recipe_key = tuple(sorted(self.ingredients))
         recipe = settings.RECIPES.get(recipe_key)
 
@@ -36,7 +29,7 @@ class Cauldron:
             self.potion_name = recipe["name"]
             self.color = recipe["color"]
         else:
-            self.potion_name = None
+            self.potion_name = "Коричневая смесь"
             self.color = settings.BROWN
 
     def update(self, dt=1):
