@@ -74,7 +74,7 @@ while running:
 
     # 1. Посетитель за прилавком (сдвинули вправо на X=480, чтобы не прятался за котлом)
     if customer.is_active:
-        screen.blit(current_visitor, (480, 125))
+        screen.blit(current_visitor, (500, 195))
 
     # 2. Сначала рисуем сам котёл (сдвинули чуть левее на X=240)
     screen.blit(ui.img_cauldron, (240, 240))
