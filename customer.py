@@ -52,7 +52,7 @@ class Customer:
         if not self.is_active:
             return False
 
-        return tuple(sorted(couldron_ingredients))==self.order_key
+        return tuple(sorted(cauldron_ingredients))==self.order_key
     def get_patience_ratio(self):
         """Возвращает остаток времени от 0.0 до 1.0 для отрисовки полоски."""
         return max(0.0, self.current_patience / self.max_patience)
