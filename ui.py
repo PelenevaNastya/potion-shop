@@ -62,6 +62,9 @@ class GameUI:
         self.img_cauldron = pygame.transform.scale(
             pygame.image.load("assets/cauldron.png").convert_alpha(), (220, 200)
         )
+        self.img_liquid = pygame.transform.scale(
+            pygame.image.load("assets/liquid.png").convert_alpha(), (220, 200)
+        )
 
         # Колбы для кнопок ингредиентов
         self.flasks = {
