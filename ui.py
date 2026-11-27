@@ -97,8 +97,7 @@ class GameUI:
             bar_color = (220, 40, 40)
 
         # Отрисовка заполнения снизу вверх
-        fi
-    ll_y = bar_y + (bar_height - fill_height)
+        fill_y = bar_y + (bar_height - fill_height)
         pygame.draw.rect(screen, bar_color, (bar_x + 2, fill_y, bar_width - 4, fill_height))
 
         # Подпись над шкалой
