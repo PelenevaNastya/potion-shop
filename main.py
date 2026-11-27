@@ -17,6 +17,9 @@ ui = GameUI(settings.WIDTH, settings.HEIGHT)
 score = 0
 current_visitor = random.choice(ui.visitors)
 game_over = False  # Флаг окончания игры при перегреве
+font_over_large = pygame.font.SysFont("arial", 32, bold=True)
+font_over_medium = pygame.font.SysFont("arial", 24, bold=True)
+font_over_small = pygame.font.SysFont("arial", 18)
 running = True
 while running:
     dt = clock.tick(settings.FPS) / 1000.0
@@ -71,7 +74,7 @@ while running:
 
     # 1. Посетитель за прилавком (сдвинули вправо на X=480, чтобы не прятался за котлом)
     if customer.is_active:
-        screen.blit(current_visitor, (480, 125))
+        screen.blit(current_visitor, (500, 195))
 
     # 2. Сначала рисуем сам котёл (сдвинули чуть левее на X=240)
     screen.blit(ui.img_cauldron, (240, 240))
@@ -95,12 +98,12 @@ while running:
     # Экран окончания игры при перегреве
     if game_over:
         overlay = pygame.Surface((settings.WIDTH, settings.HEIGHT), pygame.SRCALPHA)
-        overlay.fill((20, 0, 0, 200))  # Полупрозрачный тёмно-красный фон
+        overlay.fill((20, 0, 0, 200))
         screen.blit(overlay, (0, 0))
 
-        title_txt = ui.font_large.render("ПЕРЕГРЕВ! КОТЁЛ ВЗОРВАЛСЯ!", True, (255, 80, 80))
-        score_txt = ui.font_medium.render(f"Заработано монет: {score}", True, settings.WHITE)
-        restart_txt = ui.font_small.render("Нажмите ПРОБЕЛ или кликните мышью, чтобы начать заново", True, (220, 220, 220))
+        title_txt = font_over_large.render("ПЕРЕГРЕВ! КОТЁЛ ВЗОРВАЛСЯ!", True, (255, 80, 80))
+        score_txt = font_over_medium.render(f"Заработано монет: {score}", True, settings.WHITE)
+        restart_txt = font_over_small.render("Нажмите ПРОБЕЛ или кликните мышью, чтобы начать заново", True, (220, 220, 220))
 
         screen.blit(title_txt, (settings.WIDTH // 2 - title_txt.get_width() // 2, 210))
         screen.blit(score_txt, (settings.WIDTH // 2 - score_txt.get_width() // 2, 270))
