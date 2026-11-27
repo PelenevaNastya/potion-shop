@@ -68,9 +68,9 @@ class GameUI:
 
         # Колбы для кнопок ингредиентов
         self.flasks = {
-            "red": pygame.transform.scale(pygame.image.load("assets/flask_red.png").convert_alpha(), (40, 40)),
-            "blue": pygame.transform.scale(pygame.image.load("assets/flask_blue.png").convert_alpha(), (40, 40)),
-            "yellow": pygame.transform.scale(pygame.image.load("assets/flask_yellow.png").convert_alpha(), (40, 40)),
+            "red": pygame.transform.scale(pygame.image.load("assets/flask_red.png").convert_alpha(), (28, 28)),
+            "blue": pygame.transform.scale(pygame.image.load("assets/flask_blue.png").convert_alpha(), (28, 28)),
+            "yellow": pygame.transform.scale(pygame.image.load("assets/flask_yellow.png").convert_alpha(), (28, 28)),
         }
 
         # Спрайты посетителей разных цветов
@@ -151,9 +151,9 @@ class GameUI:
         # 1. Отрисовка всех кнопок и иконок колб
         for btn in self.buttons:
             btn.draw(screen)
-        screen.blit(self.flasks["red"], (self.btn_red.rect.x + 5, self.btn_red.rect.y + 10))
-        screen.blit(self.flasks["blue"], (self.btn_blue.rect.x + 5, self.btn_blue.rect.y + 10))
-        screen.blit(self.flasks["yellow"], (self.btn_yellow.rect.x + 5, self.btn_yellow.rect.y + 10))
+        screen.blit(self.flasks["red"], (self.btn_red.rect.x + 4, self.btn_red.rect.y + 4))
+        screen.blit(self.flasks["blue"], (self.btn_blue.rect.x + 4, self.btn_blue.rect.y + 4))
+        screen.blit(self.flasks["yellow"], (self.btn_yellow.rect.x + 4, self.btn_yellow.rect.y + 4))
 
         # 2. Отрисовка счета (сверху слева)
         score_surf = self.font_large.render(f"Монеты: {score}", True, (255, 215, 0))
