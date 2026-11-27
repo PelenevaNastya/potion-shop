@@ -21,14 +21,7 @@ class Cauldron:
         # Добавляем ингредиент в список
         self.ingredients.append(ingredient)
 
-        # Если добавлен только один ингредиент
-        if len(self.ingredients) == 1:
-            self.color = getattr(
-                settings, ingredient.upper(), settings.GRAY
-            )
-            return
-
-        # Ищем рецепт по двум ингредиентам
+        # Ищем рецепт по текущему составу котла (1, 2 или 3 ингредиента)
         recipe_key = tuple(sorted(self.ingredients))
         recipe = settings.RECIPES.get(recipe_key)
 
@@ -36,7 +29,7 @@ class Cauldron:
             self.potion_name = recipe["name"]
             self.color = recipe["color"]
         else:
-            self.potion_name = None
+            self.potion_name = "Коричневая смесь"
             self.color = settings.BROWN
 
     def update(self, dt=1):
@@ -48,3 +41,14 @@ class Cauldron:
                 settings.MAX_TEMP
             )
             self.elapsed_time -= 1
+    def cool(self, amount=20):
+        """Остужает котёл при нажатии на кнопку."""
+        self.temperature = max(settings.START_TEMP, self.temperature - amount)
+
+    def clear(self):
+        """Очищает котёл после выдачи или выброса зелья."""
+        self.ingredients = []
+        self.potion_name = None
+        self.color = settings.GRAY
+        self.temperature = settings.START_TEMP
+        self.elapsed_time = 0
