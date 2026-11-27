@@ -48,3 +48,14 @@ class Cauldron:
                 settings.MAX_TEMP
             )
             self.elapsed_time -= 1
+    def cool(self, amount=20):
+        """Остужает котёл при нажатии на кнопку."""
+        self.temperature = max(settings.START_TEMP, self.temperature - amount)
+
+    def clear(self):
+        """Очищает котёл после выдачи или выброса зелья."""
+        self.ingredients = []
+        self.potion_name = None
+        self.color = settings.GRAY
+        self.temperature = settings.START_TEMP
+        self.elapsed_time = 0
