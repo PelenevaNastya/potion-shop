@@ -55,6 +55,28 @@ class GameUI:
             self.btn_red, self.btn_blue, self.btn_yellow,
             self.btn_stir, self.btn_serve, self.btn_clear
         ]
+        # Загрузка графики из папки assets
+        self.bg_shop = pygame.transform.scale(
+            pygame.image.load("assets/shop.png").convert(), (screen_width, screen_height)
+        )
+        self.img_cauldron = pygame.transform.scale(
+            pygame.image.load("assets/cauldron.png").convert_alpha(), (220, 200)
+        )
+
+        # Колбы для кнопок ингредиентов
+        self.flasks = {
+            "red": pygame.transform.scale(pygame.image.load("assets/flask_red.png").convert_alpha(), (40, 40)),
+            "blue": pygame.transform.scale(pygame.image.load("assets/flask_blue.png").convert_alpha(), (40, 40)),
+            "yellow": pygame.transform.scale(pygame.image.load("assets/flask_yellow.png").convert_alpha(), (40, 40)),
+        }
+
+        # Спрайты посетителей разных цветов
+        self.visitors = [
+            pygame.transform.scale(pygame.image.load("assets/visitor_blue.png").convert_alpha(), (140, 180)),
+            pygame.transform.scale(pygame.image.load("assets/visitor_green.png").convert_alpha(), (140, 180)),
+            pygame.transform.scale(pygame.image.load("assets/visitor_red.png").convert_alpha(), (140, 180)),
+            pygame.transform.scale(pygame.image.load("assets/visitor_yellow.png").convert_alpha(), (140, 180)),
+        ]
 
     def handle_click(self, event):
         """
@@ -123,9 +145,12 @@ class GameUI:
 
     def draw_hud(self, screen, score, temperature, order_data=None):
         """Главная функция отрисовки всего интерфейса за один вызов."""
-        # 1. Отрисовка всех кнопок
+        # 1. Отрисовка всех кнопок и иконок колб
         for btn in self.buttons:
             btn.draw(screen)
+        screen.blit(self.flasks["red"], (self.btn_red.rect.x + 5, self.btn_red.rect.y + 10))
+        screen.blit(self.flasks["blue"], (self.btn_blue.rect.x + 5, self.btn_blue.rect.y + 10))
+        screen.blit(self.flasks["yellow"], (self.btn_yellow.rect.x + 5, self.btn_yellow.rect.y + 10))
 
         # 2. Отрисовка счета (сверху слева)
         score_surf = self.font_large.render(f"Монеты: {score}", True, (255, 215, 0))
