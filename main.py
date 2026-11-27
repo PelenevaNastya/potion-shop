@@ -55,13 +55,17 @@ while running:
     # Отрисовка фона лавки
     screen.blit(ui.bg_shop, (0, 0))
 
-    # Отрисовка посетителя за прилавком (если он активен)
+    # 1. Посетитель за прилавком (сдвинули вправо на X=480, чтобы не прятался за котлом)
     if customer.is_active:
-        screen.blit(current_visitor, (330, 115))
+        screen.blit(current_visitor, (480, 125))
 
-    # Рисуем жидкость нужного цвета и поверх неё сам котёл
-    pygame.draw.ellipse(screen, cauldron.color, (320, 275, 160, 45))
-    screen.blit(ui.img_cauldron, (290, 240))
+    # 2. Сначала рисуем сам котёл (сдвинули чуть левее на X=240)
+    screen.blit(ui.img_cauldron, (240, 240))
+
+    # 3. Перекрашиваем спрайт liquid.png в цвет текущего зелья и рисуем поверх котла
+    colored_liquid = ui.img_liquid.copy()
+    colored_liquid.fill(cauldron.color, special_flags=pygame.BLEND_RGBA_MULT)
+    screen.blit(colored_liquid, (240, 240))
 
     # Готовим данные заказа для карточки клиента
     order_info = None
